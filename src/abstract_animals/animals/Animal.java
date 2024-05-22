@@ -1,6 +1,9 @@
 package abstract_animals.animals;
 
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 public abstract class Animal {
 
 
@@ -36,7 +39,7 @@ public abstract class Animal {
         return name;
     }
 
-    public static void runAction(Animal animal){
+    public static void runAction(Animal animal) throws IllegalAccessException, NoSuchMethodException, RuntimeException {
 
         if(animal instanceof Swim){
             Swim swim = (Swim) animal;
@@ -44,9 +47,24 @@ public abstract class Animal {
         } else if (animal instanceof Fly) {
             Fly fly = (Fly) animal;
             fly.fly();
+        }else{
+
+            try{
+                String name =(String) animal.getClass().getMethod("getName").invoke(animal);
+                System.out.println(name.concat(" non ha nessuna azione particolare"));
+            }catch(IllegalAccessException e){
+                throw new IllegalAccessException("L'animale non ha un nome, dovrebbe averlo");
+            }catch( NoSuchMethodException e){
+                throw new NoSuchMethodException("Non esiste il metodo!");
+            }
+            catch (InvocationTargetException e) {
+                throw new RuntimeException("Non è stato possibile invocare il metodo");
+            }
+
         }
 
     }
+
 
 
 }
