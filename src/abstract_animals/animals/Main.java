@@ -1,5 +1,7 @@
 package abstract_animals.animals;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class Main {
     public static void main(String[] args){
 
@@ -10,10 +12,10 @@ public class Main {
             for(int i = 0; i < animals.length; i++){
                 Animal.runAction(animals[i]);
             }
-        } catch(RuntimeException | NoSuchMethodException e){
+        } catch(RuntimeException e){
             System.out.println(e.getMessage());
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+        } catch (IllegalAccessException | NoSuchMethodException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
