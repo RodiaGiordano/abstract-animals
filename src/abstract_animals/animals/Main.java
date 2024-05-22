@@ -6,6 +6,7 @@ public class Main {
         try{
 
             Animal[] animals = {new Dog("Zeus"),new Bird("Picchiarello"), new Dolphin("Flipper"), new Eagle("Olympia")};
+
             for(int i = 0; i < animals.length; i++){
                 Animal.runAction(animals[i]);
             }
